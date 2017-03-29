@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="variant_henan_local">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections-3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-log4j12-1.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/soap-check-instruction-common-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/soap-check-instruction-db-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/soap-check-para-process-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/soapVariant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-context-3.1.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/curTableImport-parseFile-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/curTableImport-parseSplite-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dom4j-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

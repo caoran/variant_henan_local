@@ -1,0 +1,38 @@
+package com.boco.soap.variant.henan.local.ldra.hw.DMLNK;
+
+import java.util.Map;
+
+import com.boco.soap.check.standvalue.valueinvoke.impl.VariantValueInvoke;
+import com.boco.soap.common.pojo.INeElement;
+import com.boco.soap.common.pojo.solution.IInstructionParameter;
+
+public class LKSNAME1 extends VariantValueInvoke {
+
+	/**
+	 * @author 
+	 * @time 2015-11-18 10:23:28 
+	 * 链路集名称 
+	 * 执行命令时，不区分大小写。
+	 */
+	@Override
+	public String[] getValues(INeElement arg0, IInstructionParameter arg1, Map<String, ?> data, String arg3) {
+        //ZZSAEGW09BER-c0-34_LKS    ZZPCRF07BNK
+		//ZZSAEGW09BER-c1-34_LKS
+		Object o = data.get("DN");
+		String result = null;
+		String name="";
+		if (null == o) {
+			result = "NULL";
+		} else {
+			for(int i=0;i<15;i++){
+				name+=","+ o.toString().trim()+"-c"+i+ "-34_LKS";
+			}
+			if (name.length()>1) {
+            	return name.substring(1).split(",");
+			}
+			
+		}
+
+		return new String[] { name };
+	}
+}

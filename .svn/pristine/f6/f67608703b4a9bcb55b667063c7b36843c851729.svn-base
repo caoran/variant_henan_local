@@ -1,0 +1,75 @@
+package com.boco.soap.fileparse.operate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class PccRuleNameSplite implements ISpliteOperate {
+    private final Logger log = LoggerFactory.getLogger(PccRuleNameSplite.class);
+
+    @Override
+    public List<Map<String, String>> operate(List<Map<String, String>> oldList) {
+        List<Map<String, String>> newList = new ArrayList<Map<String, String>>();
+        for (Map<String, String> map : oldList) {
+            String filterName = map.get("FILTER_NAME");
+            String pccRuleName = this.getPccRuleName(filterName);
+            map.put("PCC_RULE_NAME", pccRuleName);
+            String precedence = map.get("PRECEDENCE");
+            if ((precedence == null) || precedence.equals("")) {
+                map.remove("PRECEDENCE");
+                map.put("PRECEDENCE", "-1");
+            }
+            String l7Uri = map.get("L7_URI");
+
+            if ((l7Uri != null) && (l7Uri != "")) {
+                map.remove("L7_URI");
+                if (l7Uri.startsWith("^")) {
+                    map.put("L7_URI", l7Uri);
+                } else {
+                    if ((l7Uri.length() > 2) && l7Uri.startsWith("/")) {
+                        map.put("L7_URI", "^" + l7Uri);
+                    } else {
+                        map.put("L7_URI", l7Uri);
+                    }
+                }
+            }
+
+            newList.add(map);
+
+        }
+        if (this.log.isDebugEnabled()) {
+            this.log.debug(newList.toString());
+        }
+        List<Map<String, String>> newList2 = new ArrayList<Map<String, String>>();
+        for (Map<String, String> map : newList) {
+            String num = map.get("PORT_LIST");
+            if ((num != null) && (!num.equals(""))) {
+                String[] arrSpc = num.trim().split("\\s+|,|，|\\.|、");
+                Arrays.sort(arrSpc);
+                map.remove("PORT_LIST");
+                map.put("PORT_LIST", Arrays.toString(arrSpc).replaceAll("\\[|\\]", ""));
+            }
+            newList2.add(map);
+        }
+        return newList2;
+    }
+
+    private String getPccRuleName(String filterName) {
+        String reg = "(\\S+)_\\d+";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(filterName);
+        String pccRuleName = "";
+        if (matcher.find()) {
+            pccRuleName = matcher.group(1);
+        }
+
+        return pccRuleName;
+    }
+
+}
